@@ -1,5 +1,7 @@
 package cache
 
+//go:generate mockgen -source=cache.go -destination=cache_mock.go -package=cache cache
+
 type cache interface {
 	Get(string) ([]byte, error)
 	Save(string, []byte, ...int32) error
