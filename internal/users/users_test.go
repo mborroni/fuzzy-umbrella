@@ -9,6 +9,7 @@ import (
 
 const (
 	dummyID = 1
+	dummyToken = "token"
 )
 
 func newMockService(ctrl *gomock.Controller) *Service {
@@ -51,7 +52,7 @@ func TestService_Login(t *testing.T) {
 			},
 			expectations: func(fields fields) {
 				service.repository.(*Mockrepository).EXPECT().Get(gomock.Any()).Return(nil)
-				service.auth.(*Mockauthenticator).EXPECT().Authenticate(gomock.Any()).Return(newSession(1, "token"), nil)
+				service.auth.(*Mockauthenticator).EXPECT().Authenticate(gomock.Any()).Return(dummyToken, nil)
 			},
 			want: want{
 				session: newSession(1, "token"),
@@ -76,7 +77,7 @@ func TestService_Login(t *testing.T) {
 			},
 			expectations: func(fields fields) {
 				service.repository.(*Mockrepository).EXPECT().Get(gomock.Any()).Return(nil)
-				service.auth.(*Mockauthenticator).EXPECT().Authenticate(gomock.Any()).Return(nil, errors.New("error creating token"))
+				service.auth.(*Mockauthenticator).EXPECT().Authenticate(gomock.Any()).Return("", errors.New("error creating token"))
 			},
 			want: want{
 				session: nil,

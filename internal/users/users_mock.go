@@ -33,10 +33,10 @@ func (m *Mockauthenticator) EXPECT() *MockauthenticatorMockRecorder {
 }
 
 // Authenticate mocks base method
-func (m *Mockauthenticator) Authenticate(arg0 *User) (*Session, error) {
+func (m *Mockauthenticator) Authenticate(arg0 *User) (string, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Authenticate", arg0)
-	ret0, _ := ret[0].(*Session)
+	ret0, _ := ret[0].(string)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
